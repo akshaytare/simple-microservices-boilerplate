@@ -4,11 +4,12 @@
     "description": "",
     "main": "src/server.js",
     "scripts": {
-      "start": "node src/server.js"
+      "start": "nodemon src/server.js"
     },
     "dependencies": {
       "express": "^4.17.1",
-      "kafka-node": "^5.0.0"
+      "kafka-node": "^5.0.0",
+      "nodemon":"^2.0.22"
     }
   }
   
