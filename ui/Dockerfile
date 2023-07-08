@@ -8,22 +8,27 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the dependencies
-RUN npm ci
+RUN npm install
 
 # Copy the source code to the working directory
 COPY . .
 
 # Build the application
-RUN npm run build
+# RUN npm run build
 
-# Use Nginx as the web server
-FROM nginx:alpine
+# Start dev server
+CMD [ "npm", "run", "dev" ]
 
-# Copy the built application to the Nginx web server directory
-COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 5173
 
-# Expose port 80
-EXPOSE 80
+# # Use Nginx as the web server
+# FROM nginx:alpine
 
-# Start Nginx when the container starts
-CMD ["nginx", "-g", "daemon off;"]
+# # Copy the built application to the Nginx web server directory
+# COPY --from=builder /app/dist /usr/share/nginx/html
+
+# # Expose port 80
+# EXPOSE 80
+
+# # Start Nginx when the container starts
+# CMD ["nginx", "-g", "daemon off;"]

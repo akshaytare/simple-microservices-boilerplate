@@ -38,3 +38,11 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
+
+  ui:
+    build: ./ui
+    volumes:
+      - ./ui:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "8000:5173"

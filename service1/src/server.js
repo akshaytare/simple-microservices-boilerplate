@@ -1,22 +1,38 @@
 const express = require('express');
-const kafka = require('kafka-node');
+const bodyParser = require('body-parser');
+const KafkaProducer = require('./KafkaProducer');
+
 const app = express();
 const port = 3000;
 
-// Kafka client
-const client = new kafka.KafkaClient({kafkaHost: 'kafka:9092'});
-const producer = new kafka.Producer(client);
+// Configure body-parser middleware to parse request bodies
+app.use(bodyParser.json());
 
-app.get('/send', (req, res) => {
-  const payloads = [{ topic: 'mytopic', messages: 'hello from service1', partition: 0 }];
-  producer.send(payloads, function (err, data) {
-    if (err) console.log(err);
-    console.log(data);
-  });
-
-  res.send('Message sent');
+// Enable CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
 });
 
+// Initialize Kafka Producer
+const producer = new KafkaProducer();
+
+// API endpoint to send a message
+app.post('/send', async (req, res) => {
+  try {
+    const message = req.body.message;
+    // Produce the message to Kafka
+    await producer.sendMessage(message);
+    res.status(200).json({ message: 'Message sent successfully' });
+  } catch (error) {
+    console.error('Error sending message:', error);
+    res.status(500).json({ message: 'Failed to send message' });
+  }
+});
+
+// Start the server
 app.listen(port, () => {
-  console.log(`Service1 is running on port ${port}`);
+  console.log(`Service 1 listening at http://localhost:${port}`);
 });
