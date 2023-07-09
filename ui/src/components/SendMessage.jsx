@@ -9,17 +9,18 @@ import {
   useToast,
   Heading,
 } from '@chakra-ui/react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { sendMessage } from '../redux/messageSlice';
 
 const SendMessage = () => {
   const [message, setMessage] = useState('');
   const toast = useToast();
+  const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:3000/send', { message });
-      setMessage('');
+      await dispatch(sendMessage({ text }));
+      setText(''); // Clear the input field after sending the message
       toast({
         title: 'Message sent successfully!',
         status: 'success',
@@ -36,6 +37,7 @@ const SendMessage = () => {
       });
     }
   };
+  
 
   return (
     <Box p={4} borderWidth="1px" borderRadius="md">

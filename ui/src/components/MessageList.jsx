@@ -39,7 +39,11 @@ const MessageList = () => {
       ) : (
         <List>
           {messages.length > 0 ? (
-            messages.map((message, i) => <ListItem key={i}>{i+1} - {message}</ListItem>)
+            messages.map((message, i) => (
+              <ListItem key={i}>
+                {i+1} - {message.text} (By: {message.username}, Email: {message.email})
+              </ListItem>
+            ))
           ) : (
             <ListItem>No messages found.</ListItem>
           )}
