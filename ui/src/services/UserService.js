@@ -8,7 +8,8 @@ const _kc = new Keycloak({
   "publicClient": true,
   "confidentialPort": 0,
   "redirectUri": "http://localhost:5173/*",
-  "clientId": "account"
+  "clientId": "account",
+
   });
 
 /**

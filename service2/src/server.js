@@ -57,14 +57,19 @@ async function startConsumer() {
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      console.log('Received message:', message.value.toString());
+      // console.log(message)
+      // console.log(message.value)
+      // const jsonString = message.value.toString('utf8');
+      // console.log("jsonString",JSON.parse(jsonString))
+      // console.log('Received message:', message.value.toString());
       messages.push(message.value.toString());
     },
   });
 }
 
 app.get('/messages', (req, res) => {
-  res.json(messages);
+  console.log('get /messages')
+    res.json(messages);
 });
 
 app.listen(port, () => {

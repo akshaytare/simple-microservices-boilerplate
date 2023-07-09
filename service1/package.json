@@ -4,12 +4,13 @@
     "description": "",
     "main": "src/server.js",
     "scripts": {
-      "start": "nodemon src/server.js"
+        "start": "nodemon src/server.js"
     },
     "dependencies": {
-      "express": "^4.17.1",
-      "kafka-node": "^5.0.0",
-      "nodemon":"^2.0.22"
+        "express": "^4.17.1",
+        "express-session": "^1.17.3",
+        "kafka-node": "^5.0.0",
+        "keycloak-connect": "^21.1.2",
+        "nodemon": "^2.0.22"
     }
-  }
-  
+}

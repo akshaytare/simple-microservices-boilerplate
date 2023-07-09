@@ -16,14 +16,13 @@ const SendMessage = () => {
   const [message, setMessage] = useState('');
   const toast = useToast();
   const dispatch = useDispatch();
-  const text = "sss"
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     try {
-      await dispatch(sendMessage({ text }));
-      setText(''); // Clear the input field after sending the message
+      await dispatch(sendMessage({ message: message }));
+      setMessage(''); // Clear the input field after sending the message
       toast({
         title: 'Message sent successfully!',
         status: 'success',
@@ -40,7 +39,6 @@ const SendMessage = () => {
       });
     }
   };
-  
 
   return (
     <Box p={4} borderWidth="1px" borderRadius="md">
@@ -53,7 +51,7 @@ const SendMessage = () => {
             <FormLabel>Message</FormLabel>
             <Input
               type="text"
-              value={message}
+              value={message || 'test'}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Enter your message"
             />

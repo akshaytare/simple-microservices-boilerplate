@@ -41,7 +41,7 @@ const MessageList = () => {
           {messages.length > 0 ? (
             messages.map((message, i) => (
               <ListItem key={i}>
-                {i+1} - {message.text} (By: {message.username}, Email: {message.email})
+                {i+1} - {message}
               </ListItem>
             ))
           ) : (

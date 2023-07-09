@@ -1,0 +1,11 @@
+{
+    "clientId": "rest",
+    "bearerOnly": true,
+    "serverUrl": "http://localhost:8080/auth",
+    "realm": "Demo-Realm",
+    "credentials": {
+      "secret": "62c99f7c-da55-48fb-ae4e-a27f132546b7"
+    },
+    "realmPublicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhGpeNPTzIA0SpqWtOU27C3lCdHkLzWiYc3voiBZvvZdvk4wW96JymHlX2b0weDnkYfurxIRehRA0sLK8w2vjb3X9TdKOcsiQzHlWDQuA3Wu7WeDGcvv8dyDk+bMOSkqn7bMlOUm6CXxA7RrjKuDj8mseqabXNjnPgAPL6MQOWtO4RFMdPQX11fYShXrK9ELS3CqN3RrXBazzwNsreKxfuMtR4vtZCVJHYaZZMiLmWU1G5Xsh/tHje2AVLPkt3ncchyKsrkCdP9PWsYK5dMkKsDbA03JOq7azDDlhqgT2pUNB3dZ1b9sKQXqPC6ZSieVJcm6WAj8DJcjoYOgZjgm2/8X1fwIDAQAB"
+  }
+  
