@@ -1,0 +1,37 @@
+{
+    "id": "myrealm",
+    "realm": "myrealm",
+    "enabled": true,
+    "sslRequired": "external",
+    "registrationAllowed": true,
+    "roles": {
+        "realm": [
+            {
+                "id": "123",
+                "name": "user",
+                "description": "Regular User Role"
+            },
+            {
+                "id": "456",
+                "name": "admin",
+                "description": "Admin User Role"
+            }
+        ]
+    },
+    "users": [
+        {
+            "username": "testuser",
+            "enabled": true,
+            "emailVerified": false,
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": "testpassword"
+                }
+            ],
+            "realmRoles": [
+                "user"
+            ]
+        }
+    ]
+}

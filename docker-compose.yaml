@@ -46,3 +46,11 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "8000:5173"
+
+  keycloak:
+    build: ./keycloak
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    ports:
+      - 8080:8080
