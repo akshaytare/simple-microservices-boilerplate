@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-do
 import { ChakraProvider, Flex, Box, Text, extendTheme, Button } from '@chakra-ui/react';
 import SendMessage from './components/SendMessage';
 import MessageList from './components/MessageList';
-import UserService from './services/UserService';
+import { KeycloakProvider, KeycloakContext } from './KeycloakProvider';
 
 const theme = extendTheme({
   config: {
@@ -13,12 +13,14 @@ const theme = extendTheme({
 });
 
 const App = () => {
+  const { doLogin, doLogout, isLoggedIn, getUsername } = React.useContext(KeycloakContext);
+
   const handleLogin = () => {
-    UserService.doLogin();
+    doLogin();
   };
 
   const handleSignOut = () => {
-    UserService.doLogout();
+    doLogout();
   };
 
   return (
@@ -32,10 +34,10 @@ const App = () => {
               </Text>
             </Box>
             <Flex>
-              {UserService.isLoggedIn() ? (
+              {isLoggedIn() ? (
                 <>
                   <Text fontSize="lg" mr={8} mt="1">
-                    Hello, {UserService.getUsername()}!
+                    Hello, {getUsername()}!
                   </Text>
                   <Button colorScheme="red" variant="outline" mr={4} onClick={handleSignOut}>
                     Sign Out
@@ -63,7 +65,7 @@ const App = () => {
         </Box>
         <Box py={8} px={4}>
           <Switch>
-            <Route exact path="/" component={UserService.isLoggedIn() ? SendMessage : null} />
+            <Route exact path="/" component={isLoggedIn() ? SendMessage : null} />
             <Route path="/messages" component={MessageList} />
           </Switch>
         </Box>
@@ -72,4 +74,10 @@ const App = () => {
   );
 };
 
-export default App;
+const RootApp = () => (
+  <KeycloakProvider>
+    <App />
+  </KeycloakProvider>
+);
+
+export default RootApp;

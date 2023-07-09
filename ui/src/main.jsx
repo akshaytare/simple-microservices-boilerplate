@@ -1,16 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import UserService from './services/UserService';
+import App from './App.jsx';
+import { KeycloakProvider } from './KeycloakProvider';
 
-const renderApp = () => ReactDOM.createRoot(document.getElementById('root')).render(
+const Main = () => (
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <KeycloakProvider>
+        <App />
+      </KeycloakProvider>
     </Provider>
   </React.StrictMode>
 );
 
-UserService.initKeycloak(renderApp);
+ReactDOM.createRoot(document.getElementById('root')).render(<Main />);
