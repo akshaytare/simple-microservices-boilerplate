@@ -16,8 +16,11 @@ const SendMessage = () => {
   const [message, setMessage] = useState('');
   const toast = useToast();
   const dispatch = useDispatch();
+  const text = "sss"
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
     try {
       await dispatch(sendMessage({ text }));
       setText(''); // Clear the input field after sending the message

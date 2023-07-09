@@ -14,9 +14,11 @@ const _kc = new Keycloak({
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
  *
- * @param onAuthenticatedCallback
+ * @param renderApp
  */
-const initKeycloak = (onAuthenticatedCallback) => {
+const initKeycloak = (renderApp) => {
+  renderApp()
+
   _kc.init({
     onLoad: 'check-sso',
     silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
@@ -26,10 +28,14 @@ const initKeycloak = (onAuthenticatedCallback) => {
       if (!authenticated) {
         console.log("user is not authenticated..!");
       }
-      onAuthenticatedCallback();
+      renderApp();
     })
-    .catch(console.error);
+    .catch((error) => {
+      console.log("Error during initilization", error)
+    });
 };
+
+
 
 const doLogin = _kc.login;
 
