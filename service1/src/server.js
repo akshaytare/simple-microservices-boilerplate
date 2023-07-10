@@ -49,7 +49,9 @@ const producer = new KafkaProducer();
 
 // Custom middleware to check authentication
 const checkAuthentication = (req, res, next) => {
+  console.log("checking auth", req.kauth)
   if (req.kauth.grant) {
+    console.log(req.kauth);
     console.log("req.user", req.user);
     console.log("req.kauth", req.kauth);
      const username = req.kauth.grant.access_token.content.preferred_username;
@@ -66,7 +68,7 @@ console.log("username",username)
 
 
 // API endpoint to send a message
-app.post('/send', checkAuthentication, async (req, res) => {
+app.post('/send', keycloak.protect(),checkAuthentication, async (req, res) => {
   console.log('post /send')
   
   try {
